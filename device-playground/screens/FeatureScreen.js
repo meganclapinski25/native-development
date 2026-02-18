@@ -8,54 +8,32 @@ export default function FeatureScreen({ route }) {
   const [message, setMessage] = React.useState('Hello From my App!');
   const [status, setStatus] = React.useState('');
 
-  const pickImage = async () => {
-    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!perm.granted) {
-      Alert.alert('Permission required', 'Please allow photo access to pick an image.');
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
-      allowsEditing: true,
-      quality: 0.8,
-    });
-
-    if (result.canceled) return;
-
-    setImageUri(result.assets[0].uri);
+  const onPress = async () => {
+    const result = await Share.share({message});
+    setStatus(result.action === Share.sharedAction ? 'Shared!' : 'Canceled');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>My Feature</Text>
-      <Text style={styles.station}>{station}</Text>
-
-      <Pressable style={styles.button} onPress={pickImage}>
-        <Text style={styles.buttonText}>Pick Image</Text>
-      </Pressable>
-
-      {!imageUri ? (
-        <Text style={styles.hint}>No image selected yet.</Text>
-      ) : (
-        <Image source={{ uri: imageUri }} style={styles.image} />
-      )}
+        <Text>{message}</Text>
+            <Pressable style={styles.button} onPress={onPress}>
+                <Text style={styles.buttonText}>Share</Text>
+            </Pressable>
+        {status ? <Text>{status}</Text> : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16 },
-  title: { fontSize: 28, fontWeight: '700', marginBottom: 6 },
-  station: { fontSize: 18, fontWeight: '700', marginBottom: 12 },
-  hint: { marginTop: 12, color: '#555' },
+  input: {
+    borderWidth: 1, borderColor: '#ddd',
+    borderRadius: 10, padding: 12,
+    fontSize: 16, marginBottom: 12,
+  },
   button: {
-    backgroundColor: '#f4511e',
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    borderRadius: 10,
-    alignSelf: 'flex-start',
+    backgroundColor: '#f4511e', padding: 12,
+    borderRadius: 10, alignSelf: 'flex-start',
   },
   buttonText: { color: 'white', fontWeight: '700', fontSize: 16 },
-  image: { marginTop: 12, width: '100%', height: 280, borderRadius: 12 },
 });
