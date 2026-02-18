@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 export default function FeatureScreen({ route }) {
   const station = route?.params?.station ?? 'Share API';
   
-  const [message, setMessage] = React.useState('Hello From my App!');
+  const [message, setMessage] = React.useState('');
   const [status, setStatus] = React.useState('');
 
   const onPress = async () => {
@@ -15,11 +15,17 @@ export default function FeatureScreen({ route }) {
 
   return (
     <View style={styles.container}>
-        <Text>{message}</Text>
+        <TextInput
+            style = {styles.input}
+            value = {message}
+            onChangeText = {setMessage}
+            placeholder='Type a message'
+        
+        />
             <Pressable style={styles.button} onPress={onPress}>
                 <Text style={styles.buttonText}>Share</Text>
             </Pressable>
-        {status ? <Text>{status}</Text> : null}
+            {status && <Text>{status}</Text>}
     </View>
   );
 }

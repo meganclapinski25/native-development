@@ -7,13 +7,13 @@ export default function NotesScreen() {
       <Text style={styles.title}>Notes</Text>
 
       <Text style={styles.h}>1) API used</Text>
-      <Text style={styles.p}>TODO: (Image Picker / Camera / Location / ...)</Text>
+      <Text style={styles.p}>Share API </Text>
 
       <Text style={styles.h}>2) Permissions</Text>
-      <Text style={styles.p}>TODO: What permission did you request? What happens if denied?</Text>
+      <Text style={styles.p}>The Share API doesnt require any permissions from the user</Text>
 
       <Text style={styles.h}>3) Real-world use case</Text>
-      <Text style={styles.p}>TODO: Why would a real app need this?</Text>
+      <Text style={styles.p}>The Share API is probably used for a lot of things, like sharing posts on social media, exporting photos, notes apps, news articles</Text>
 
       <Text style={styles.h}>4) One challenge</Text>
       <Text style={styles.p}>TODO: What was confusing or tricky?</Text>
