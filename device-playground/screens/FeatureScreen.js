@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { View, Text, Pressable, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Image, Alert, TextInput,Share } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 export default function FeatureScreen({ route }) {
-  const station = route?.params?.station ?? 'Image Picker';
-  const [imageUri, setImageUri] = React.useState(null);
+  const station = route?.params?.station ?? 'Share API';
+  
+  const [message, setMessage] = React.useState('Hello From my App!');
+  const [status, setStatus] = React.useState('');
 
   const pickImage = async () => {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
